@@ -56,6 +56,7 @@ export default {
           }
       }
   },
+
 methods : {
     switchToCreateAccount: function(){
         this.mode = 'create';
@@ -63,12 +64,28 @@ methods : {
     switchToLogin : function (){
         this.mode = 'login';
     },
-    createAccount : function(){
-        console.log(this.email, this.prenom,this.nom, this.password);
+    login: function(){
+      this.$store.dispatch("login",{
+         email: this.email,
+         password : this.password,
+       }).then(function(response){
+         console.log(response);
+       }, function (error){
+         console.log(error);
+       })
     },
-    login : function(){
-        console.log(this.email,this.password);
-    }
+    createAccount : function(){
+       this.$store.dispatch("createAccount",{
+         email: this.email,
+         nom : this.nom,
+         prenom : this.prenom,
+         password : this.password,
+       }).then(function(response){
+         console.log(response);
+       }, function (error){
+         console.log(error);
+       })
+    },
 }
 }
 </script>
