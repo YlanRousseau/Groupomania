@@ -1,5 +1,5 @@
 <template>
-    <div class="header">
+    <div class="navhead">
         <router-link to='/'>
         <h1>
             <img src="@/assets/icon-left-font.png" alt="Groupomania logo">
@@ -7,12 +7,11 @@
         </router-link>
 
         <nav>
-            <router-link to='/profile'>
-                <div>Mon compte</div>
-            </router-link>
+            <div> Accueil </div>
             <div id="disconnect-btn">Se déconnecter</div>
         </nav>
     </div> 
+
 </template>
 
 <script>
@@ -22,13 +21,13 @@ name:'Header',
 </script>
 
 <style scoped>
-    .header{
+    .navhead{
         display: flex;
         justify-content: space-between;
         align-items: center;
         padding: 30px 70px 20px 70px;
     }
-    .header img{
+    .navhead img{
         width: 230px;
         height: auto;
     }

@@ -15,11 +15,19 @@
     <div class="form-row">
       <input v-model="password" class="form-row__input" type="password" placeholder="Mot de passe"/>
     </div>
+    <div class="form-row" v-if="mode == 'login' && status == 'error_login'">
+      Adresse mail et/ou mot de passe invalide
+    </div>
+    <div class="form-row" v-if="mode == 'create' && status == 'error_create'">
+      Adresse mail déjà utilisée
+    </div>
     <div class="form-row">
       <button @click="login()" class="button" :class="{'button--disabled' : !validatedFields}" v-if="mode == 'login'">
-        <span >Connexion</span>
+        <span v-if="status == 'loading'">Connexion en cours...</span>
+        <span v-else>Connexion</span>
       </button>
       <button @click="createAccount()" class="button" :class="{'button--disabled' : !validatedFields}" v-else>
+        <span v-if="status == 'loading'">Création en cours...</span>
         <span>Créer mon compte</span>
       </button>
     </div>
@@ -27,6 +35,8 @@
 </template>
 
 <script>
+
+import { mapState } from 'vuex'
 
 export default {
   name: 'Login',
@@ -54,7 +64,8 @@ export default {
                   return false;
               }
           }
-      }
+      },
+      ...mapState(['status'])
   },
 
 methods : {
@@ -65,23 +76,25 @@ methods : {
         this.mode = 'login';
     },
     login: function(){
+      const self = this;
       this.$store.dispatch("login",{
          email: this.email,
          password : this.password,
-       }).then(function(response){
-         console.log(response);
+       }).then(function(){
+         self.$router.push('/profile')
        }, function (error){
          console.log(error);
        })
     },
     createAccount : function(){
+      const self = this;
        this.$store.dispatch("createAccount",{
          email: this.email,
          nom : this.nom,
          prenom : this.prenom,
          password : this.password,
-       }).then(function(response){
-         console.log(response);
+       }).then(function(){
+         self.$router.push('/profile')
        }, function (error){
          console.log(error);
        })
