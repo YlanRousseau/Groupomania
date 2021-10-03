@@ -13,13 +13,7 @@
       <input v-model="nom" class="form-row__input" type="text" placeholder="Nom"/>
     </div>
     <div class="form-row">
-      <input v-model="password" v-on:keydown="invalid = false" class="form-row__input" type="password" placeholder="Mot de passe"/>
-    </div>
-    <div class="form-row" v-if="mode == 'login' && status == 'error_login'">
-      Adresse mail et/ou mot de passe invalide
-    </div>
-    <div class="form-row" v-if="mode == 'create' && status == 'error_create'">
-      Adresse mail déjà utilisée
+      <input v-model="password" class="form-row__input" type="password" placeholder="Mot de passe"/>
     </div>
     <div class="form-row">
       <button @click="login()" class="button" :class="{'button--disabled' : !validatedFields}" v-if="mode == 'login'">
@@ -47,7 +41,6 @@ export default {
           prenom:'',
           nom: '',
           password: '',
-          invalid: false,
      }
   },
   computed: {
@@ -137,16 +130,12 @@ methods : {
     color:#aaaaaa;
     text-align: center;
   }
-  .imgroupo{
-      width: 300px;
-  }
   img {
   max-width: 100%;
   border-radius: 8px;
 }
 .card {
   max-width: 100%;
-  width: 540px;
   background: rgb(255, 255, 255);
   border-radius: 16px;
   padding:32px;

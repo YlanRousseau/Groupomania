@@ -1,13 +1,13 @@
 <template>
     <div class="navhead">
-        <router-link to='/'>
+        <router-link to='/mur'>
         <h1>
-            <img src="@/assets/icon-left-font.png" alt="Groupomania logo">
+            <img src="@/assets/icon-above-font.svg" alt="Groupomania logo">
         </h1>
         </router-link>
 
         <nav>
-            <div> Accueil </div>
+            <router-link to='/profile'><div> Profile</div></router-link>
         </nav>
     </div> 
 
@@ -24,10 +24,10 @@ name:'Header',
         display: flex;
         justify-content: space-between;
         align-items: center;
-        padding: 30px 70px 20px 70px;
+        padding: 2%;
     }
     .navhead img{
-        width: 230px;
+        width: 170px;
         height: auto;
     }
     nav{

@@ -2,7 +2,7 @@
 <div class="Compte">
   <div class="card">
     <h1 class="card__title">Espace Perso</h1>
-    <p class="card__subtitle">Me Voilà sur mon profil</p>
+    <p class="card__subtitle">Me voilà sur mon profil</p>
     <div class="form-row">
       <button @click="logout()" class="button">
         Déconnexion
@@ -17,6 +17,11 @@
 export default {
   name: 'Compte',
   
+  methods :{
+    logout : function(){
+  
+    }
+  }
 }
 </script>
 
@@ -26,7 +31,7 @@ export default {
     justify-content: center;
 }
 .card {
-  width: 50%;
+  max-width: 100%;
   background: rgb(255, 255, 255);
   border-radius: 16px;
   padding: 35px;
