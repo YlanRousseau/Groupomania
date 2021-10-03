@@ -12,6 +12,12 @@ const routes = [{
         component: () =>
             import ('../views/Profile.vue')
     },
+    {
+        path: '/mur',
+        name: 'Mur',
+        component: () =>
+            import ('../views/Mur.vue')
+    },
 ]
 
 const router = createRouter({

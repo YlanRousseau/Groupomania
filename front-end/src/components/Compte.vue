@@ -1,40 +1,48 @@
 <template>
-    <main class="container">    
-        <div class="row justify-content-center">
-            <div class="col-10">
-                <div class="col-12">
-                    <h1 class="my-2 btn btn-block btn-info font-weight-bold" style="cursor:default">Vous consultez vote compte</h1>
-                </div>
-                <section id="filPrincipal" class="row">
-                    <div class="col-12">
-                         
-                        <div class="card bg-light my-3 class=center-block" style="float:none;">
-                            <div class="card-header">
-                                <div class="row justify-content-around">
-                                </div>
-                            </div>
-                            <div class="card-body mx-auto">
-                                <button class="button" ><span>SUPPRIMER VOTRE COMPTE</span></button>
-                            </div>
-                        </div> 
-                    </div>  
-                </section>
-            </div>
-        </div>
-    </main>
+<div class="Compte">
+  <div class="card">
+    <h1 class="card__title">Espace Perso</h1>
+    <p class="card__subtitle">Me Voilà sur mon profil</p>
+    <div class="form-row">
+      <button @click="logout()" class="button">
+        Déconnexion
+      </button>
+    </div>
+  </div>
+  </div>
 </template>
 
-
 <script>
-export default{
-name:'Compte',  
-}
 
+export default {
+  name: 'Compte',
+  
+}
 </script>
 
 <style scoped>
-p{
-    font-size: 13px;
+.compte{
+    display: flex;
+    justify-content: center;
+}
+.card {
+  width: 50%;
+  background: rgb(255, 255, 255);
+  border-radius: 16px;
+  padding: 35px;
+  margin-top: 2%;
+  box-shadow: rgb(82 82 82) 1px 7px 24px 5px;
+  text-align: center;
+}
+.card__title {
+  text-align:center;
+  font-weight: 800;
+  margin: 0;
+}
+.card__subtitle {
+  text-align: center;
+  color:#666;
+  font-weight: 500;
 }
 .button {
     background: #2196F3;
@@ -45,6 +53,18 @@ p{
     border: none;
     width: 100%;
     padding: 16px;
+    transition: .4s background-color;
   }
-
-</style>
+  .button:hover {
+    cursor:pointer;
+    background: #1976D2;
+  }
+  .button--disabled {
+    background:#cecece;
+    color:#ececec
+  }
+  .button--disabled:hover {
+    cursor:not-allowed;
+    background:#cecece;
+  }
+</style>>

@@ -8,7 +8,6 @@
 
         <nav>
             <div> Accueil </div>
-            <div id="disconnect-btn">Se déconnecter</div>
         </nav>
     </div> 
 

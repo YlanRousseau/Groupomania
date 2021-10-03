@@ -17,13 +17,13 @@ export default {
        Header,
        Compte,
    },
-   mounted: function(){
-       console.log(this.$store.state.user);
-        if (this.$store.state.user.userId == -1){
-            this.$router.push('/'); 
-            return;
-        }
-   }
 }
 </script>
 
+<style scoped>
+.Profile{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+</style>

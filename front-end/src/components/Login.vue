@@ -13,7 +13,7 @@
       <input v-model="nom" class="form-row__input" type="text" placeholder="Nom"/>
     </div>
     <div class="form-row">
-      <input v-model="password" class="form-row__input" type="password" placeholder="Mot de passe"/>
+      <input v-model="password" v-on:keydown="invalid = false" class="form-row__input" type="password" placeholder="Mot de passe"/>
     </div>
     <div class="form-row" v-if="mode == 'login' && status == 'error_login'">
       Adresse mail et/ou mot de passe invalide
@@ -23,11 +23,9 @@
     </div>
     <div class="form-row">
       <button @click="login()" class="button" :class="{'button--disabled' : !validatedFields}" v-if="mode == 'login'">
-        <span v-if="status == 'loading'">Connexion en cours...</span>
-        <span v-else>Connexion</span>
+        <span>Connexion</span>
       </button>
       <button @click="createAccount()" class="button" :class="{'button--disabled' : !validatedFields}" v-else>
-        <span v-if="status == 'loading'">Création en cours...</span>
         <span>Créer mon compte</span>
       </button>
     </div>
@@ -37,6 +35,8 @@
 <script>
 
 import { mapState } from 'vuex'
+import router from "../router";
+const axios = require('axios');
 
 export default {
   name: 'Login',
@@ -47,6 +47,7 @@ export default {
           prenom:'',
           nom: '',
           password: '',
+          invalid: false,
      }
   },
   computed: {
@@ -76,31 +77,41 @@ methods : {
         this.mode = 'login';
     },
     login: function(){
-      const self = this;
-      this.$store.dispatch("login",{
-         email: this.email,
-         password : this.password,
-       }).then(function(){
-         self.$router.push('/profile')
-       }, function (error){
-         console.log(error);
-       })
-    },
-    createAccount : function(){
-      const self = this;
-       this.$store.dispatch("createAccount",{
-         email: this.email,
-         nom : this.nom,
-         prenom : this.prenom,
-         password : this.password,
-       }).then(function(){
-         self.$router.push('/profile')
-       }, function (error){
-         console.log(error);
-       })
-    },
-}
-}
+       axios.post("http://localhost:3000/api/auth/login", { 
+                email :     this.email,
+                password:   this.password,
+             })
+            .then(function (res) {
+                localStorage.setItem("token",   res.data.token)
+                localStorage.setItem("userId",  res.data.userId)
+                localStorage.setItem("userName",res.data.userName)
+                window.alert('connexion réussie, redirection vers la page principale');
+                router.push({ path : '/Mur'});
+            })
+            .catch((error) => {
+                console.log(error);
+            })         
+        },
+      
+      createAccount : function(){  
+      
+        axios.post("http://localhost:3000/api/auth/signup", { 
+                    nom : this.nom, 
+                    prenom : this.prenom,
+                    email : this.email,
+                    password : this.password,
+                })
+                .then(() => {
+                    alert('inscription réussie, redirection vers le module de connexion');
+                    router.push({ path : '/'});
+                    location.reload();
+                })
+                .catch((error)=>{
+                    console.log(error)});
+            } 
+        }
+    }
+
 </script>
 
 <style scoped>
