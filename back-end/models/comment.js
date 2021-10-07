@@ -1,8 +1,10 @@
 module.exports = (sequelize, Sequelize) => {
-    const Comments = sequelize.define("comments", {
-        Comment: {
-            type: Sequelize.TEXT
-        },
-    });
-    return Comments;
+    const Comment = sequelize.define('Comment', {
+        author: Sequelize.STRING,
+        authorId: Sequelize.BIGINT,
+        postId: Sequelize.BIGINT,
+        comment: Sequelize.STRING
+    })
+
+    return Comment
 };

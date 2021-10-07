@@ -13,13 +13,15 @@
 </template>
 
 <script>
+import router from "../router";
 
 export default {
   name: 'Compte',
   
   methods :{
     logout : function(){
-  
+      localStorage.clear();
+      router.push({ path : "/" });
     }
   }
 }

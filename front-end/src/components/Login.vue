@@ -70,6 +70,7 @@ methods : {
         this.mode = 'login';
     },
     login: function(){
+      
        axios.post("http://localhost:3000/api/auth/login", { 
                 email :     this.email,
                 password:   this.password,

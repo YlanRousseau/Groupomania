@@ -38,6 +38,8 @@ name:'Header',
         font-weight: bold;
         cursor: pointer;
         transition-duration: .2s;
+        color: red;
+        text-decoration: none;
     }
     .fas{
         font-size: 1.5rem;
