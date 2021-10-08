@@ -65,8 +65,7 @@ export default {
             }
             })
                 .then(() => {
-                  window.location.reload();
-                    
+                  window.location.reload(); 
                 })
                 .then(() =>{
                   router.push({ path : '/mur'});

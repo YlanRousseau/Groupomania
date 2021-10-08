@@ -2,10 +2,10 @@
 <div class="Compte">
   <div class="card">
     <h1 class="card__title">Espace Perso</h1>
-    <p class="card__subtitle">Me voilà sur mon profil</p>
+    <p> Bonjour, {{ this.userAccount.userName}} {{ this.userAccount.userFirstName}} sur cette page tu peux supprimer ton compte ! </p>
     <div class="form-row">
-      <button @click="logout()" class="button">
-        Déconnexion
+      <button  @click="deleteAccount()" class="button">
+        Supprimer Compte
       </button>
     </div>
   </div>
@@ -14,16 +14,35 @@
 
 <script>
 import router from "../router";
+const axios = require('axios');
 
 export default {
   name: 'Compte',
   
-  methods :{
-    logout : function(){
-      localStorage.clear();
-      router.push({ path : "/" });
+  data() {
+    return {
+      userAccount:{
+        userId: localStorage.getItem('userId'), 
+        userName: localStorage.getItem('userName'),
+        userFirstName :  localStorage.getItem('userFirstName'),
+      }
+    }
+  },
+   methods: {
+    deleteAccount(){
+      axios.delete(`http://localhost:3000/api/auth/${ this.userAccount.userId }`,
+          {
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': `Bearer` + localStorage.getItem("token"),
+            }
+          }
+      )
+      .then(localStorage.clear())
+      .then(router.push({ path : '/'}));
     }
   }
+  
 }
 </script>
 
@@ -52,7 +71,7 @@ export default {
   font-weight: 500;
 }
 .button {
-    background: #2196F3;
+    background: red;
     color:white;
     border-radius: 8px;
     font-weight: 800;
@@ -62,10 +81,7 @@ export default {
     padding: 16px;
     transition: .4s background-color;
   }
-  .button:hover {
-    cursor:pointer;
-    background: #1976D2;
-  }
+  
   .button--disabled {
     background:#cecece;
     color:#ececec

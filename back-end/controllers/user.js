@@ -45,12 +45,36 @@ exports.login = (req, res, next) => {
                         message: "connexion réussi",
                         userId: user.id,
                         userName: user.nom,
+                        userFirstName: user.prenom,
+                        isAdmin: user.isAdmin,
                         token: jwt.sign({ userId: user.id },
-                            process.env.TOKEN, { expiresIn: '24h' }
-                        )
+                            'RANDOM_TOKEN_SECRET', { expiresIn: '24h' }
+                        ),
                     });
                 })
                 .catch(error => res.status(500).json({ error }));
+        })
+        .catch(error => res.status(500).json({ error }));
+};
+
+exports.getAllAccounts = (req, res, next) => {
+    User.findAll()
+        .then((users) => res.status(200).json(users))
+        .catch(error => res.status(400).json({ error }));
+};
+
+exports.getOneAccount = (req, res, next) => {
+    User.findOne({ where: { id: req.params.id } })
+        .then((user) => res.status(200).json(user))
+        .catch(error => res.status(404).json({ error }));
+};
+
+exports.deleteAccount = (req, res, next) => {
+    User.findOne({ where: { id: req.params.id } })
+        .then((user) => {
+            User.destroy({ where: { id: req.params.id } })
+                .then(() => res.status(200).json({ message: 'Compte supprimé' }))
+                .catch(error => res.status(400).json({ error }));
         })
         .catch(error => res.status(500).json({ error }));
 };

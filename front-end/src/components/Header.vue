@@ -7,16 +7,26 @@
         </router-link>
 
         <nav>
-            <router-link to='/profile'><div> Profile</div></router-link>
+            <router-link to='/profile'><div> Votre compte</div></router-link>
+            <div @click="logout()" > Deconnexion</div>
         </nav>
     </div> 
 
 </template>
 
 <script>
+import router from "../router";
+
 export default{
 name:'Header',  
+methods :{
+    logout : function(){
+      localStorage.clear();
+      router.push({ path : "/" });
+    },
+  }
 }
+  
 </script>
 
 <style scoped>
@@ -38,7 +48,7 @@ name:'Header',
         font-weight: bold;
         cursor: pointer;
         transition-duration: .2s;
-        color: red;
+        color:black;
         text-decoration: none;
     }
     .fas{

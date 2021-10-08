@@ -17,23 +17,27 @@ exports.createPost = (req, res, next) => {
         .catch(error => res.status(400).json({ error }))
 };
 
-exports.findAll = (req, res) => {
+exports.findAllPost = (req, res) => {
 
 };
 
 
-exports.findOne = (req, res) => {
-
-};
-
-exports.update = (req, res) => {
+exports.findOnePost = (req, res) => {
 
 };
 
 
-exports.delete = (req, res) => {
 
+exports.deletePost = (req, res) => {
+    Post.findOne({ where: { id: req.params.id } })
+        .then((post) => {
+            Post.destroy({ where: { id: req.params.id } })
+                .then(() => res.status(200).json({ message: 'Publication supprimé' }))
+                .catch(error => res.status(400).json({ error }));
+        })
+        .catch(error => res.status(500).json({ error }));
 };
+
 
 
 exports.deleteAll = (req, res) => {

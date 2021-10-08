@@ -23,7 +23,7 @@ module.exports = (sequelize, Sequelize) => {
             allowNull: false,
             type: Sequelize.STRING
         },
-        admin: {
+        isAdmin: {
             allowNull: false,
             defaultValue: false,
             type: Sequelize.BOOLEAN

@@ -76,10 +76,12 @@ methods : {
                 password:   this.password,
              })
             .then(function (res) {
-                localStorage.setItem("token",   res.data.token)
+                localStorage.setItem("token", res.data.token)
+                localStorage.setItem("isAdmin", res.data.isAdmin)
                 localStorage.setItem("userId",  res.data.userId)
                 localStorage.setItem("userName",res.data.userName)
-                window.alert('connexion réussie, redirection vers la page principale');
+                localStorage.setItem("userFirstName",res.data.userFirstName)
+                window.alert(" 🙋‍♂️ Bienvenue sur Groupomania ! ");
                 router.push({ path : '/Mur'});
             })
             .catch((error) => {
@@ -96,7 +98,7 @@ methods : {
                     password : this.password,
                 })
                 .then(() => {
-                    alert('inscription réussie, redirection vers le module de connexion');
+                    alert('Inscription réussie, redirection vers le module de connexion');
                     router.push({ path : '/'});
                     location.reload();
                 })
